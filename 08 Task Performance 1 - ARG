@@ -1,0 +1,69 @@
+import java.util.*;
+
+interface User_Info {
+    public void user_info(String user_name);
+}
+
+interface User_Story {
+    public void user_story(int user_mode);
+}
+
+interface User_Play {
+    public void user_play(String play);
+}
+
+public class MyGame implements User_Info, User_Story, User_Play {
+    String user_name;
+    int user_mode;
+    String play;
+
+    public void user_info(String user_name) {
+        this.user_name = user_name;
+        System.out.println("Welcome, " + user_name + "!");
+    }
+
+    public void user_story(int user_mode) {
+        this.user_mode = user_mode;
+        if (user_mode == 1) {
+            System.out.println("You have chosen - Story Mode -");
+        } else if (user_mode == 2) {
+            System.out.println("You have chosen - Survival Mode -");
+        } else {
+            System.out.println("Invalid mode! Defaulting to Story Mode.");
+        }
+    }
+
+    public void user_play(String play) {
+        this.play = play;
+        if (play.equalsIgnoreCase("P")) {
+            System.out.println("The Game Started!");
+        } else if (play.equalsIgnoreCase("X")) {
+            System.out.println("The Game will close...");
+        } else {
+            System.out.println("Invalid choice! Please choose 'P' to play or 'X' to exit.");
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        MyGame my_game = new MyGame();
+
+        System.out.print("Enter your name: ");
+        String user_name = sc.nextLine();
+        my_game.user_info(user_name);
+
+        System.out.println("Press 1 or 2 to select your game mode:");
+        System.out.println("1 - Story Mode");
+        System.out.println("2 - Survival Mode");
+        System.out.print(": ");
+        int user_mode = sc.nextInt();
+        sc.nextLine();
+        my_game.user_story(user_mode);
+
+        System.out.println("Press 'P' to play or 'X' to exit the game:");
+        String play = sc.nextLine();
+        my_game.user_play(play);
+
+        sc.close();
+    }
+}
